@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmileCare Dental Clinic — Karachi | Book an Appointment</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f4f9fb;
+      color: #1f2d3d;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #f7d34e, #f2b705);
+      color: #3a2e05;
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 0.6rem;
+      opacity: 0.92;
+      font-size: 1.05rem;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 1rem;
+      background: rgba(255,255,255,0.45);
+      border: 1px solid rgba(58,46,5,0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    .header-links {
+      margin-top: 1.2rem;
+    }
+
+    .header-links a {
+      color: #3a2e05;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-bottom: 1.5px solid rgba(58,46,5,0.4);
+      padding-bottom: 2px;
+    }
+
+    .header-links a:hover { border-bottom-color: #3a2e05; }
+
+    .header-links a.admin-btn {
+      display: inline-block;
+      background: rgba(255,255,255,0.55);
+      border: 1.5px solid rgba(58,46,5,0.35);
+      border-radius: 999px;
+      padding: 0.45rem 1.3rem;
+      border-bottom: 1.5px solid rgba(58,46,5,0.35);
+    }
+
+    .header-links a.admin-btn:hover {
+      background: #fff;
+      border-color: #3a2e05;
+    }
+
+    .link-note {
+      display: none;
+      max-width: 420px;
+      margin: 0.9rem auto 0;
+      font-size: 0.82rem;
+      background: rgba(255,255,255,0.7);
+      border: 1px dashed rgba(58,46,5,0.4);
+      border-radius: 8px;
+      padding: 0.6rem 0.9rem;
+      color: #4a3a08;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #0a7ea4;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-sub {
+      color: #5a6b7b;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ---- Time slots ---- */
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .slot {
+      background: #fff;
+      border: 2px solid #d8e7ee;
+      border-radius: 12px;
+      padding: 0.9rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-weight: 600;
+      color: #0a7ea4;
+    }
+
+    .slot span {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #7a8b9a;
+      margin-top: 0.15rem;
+    }
+
+    .slot:hover {
+      border-color: #14b8a6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(10,126,164,0.13);
+    }
+
+    .slot.selected {
+      background: #14b8a6;
+      border-color: #14b8a6;
+      color: #fff;
+    }
+
+    .slot.selected span { color: rgba(255,255,255,0.85); }
+
+    .slot.booked {
+      background: #eef2f5;
+      border-color: #e2e9ee;
+      color: #a9b6c2;
+      cursor: not-allowed;
+    }
+
+    .slot.booked:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: #e2e9ee;
+    }
+
+    /* ---- Doctors ---- */
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.3rem;
+    }
+
+    .doctor-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 14px rgba(10,126,164,0.08);
+      text-align: center;
+      border-top: 4px solid #14b8a6;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0a7ea4, #14b8a6);
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.9rem;
+    }
+
+    .doctor-card h3 {
+      font-size: 1.1rem;
+      color: #1f2d3d;
+    }
+
+    .specialty {
+      color: #14b8a6;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0.2rem 0 0.6rem;
+    }
+
+    .doctor-card p {
+      font-size: 0.9rem;
+      color: #5a6b7b;
+    }
+
+    .doctor-meta {
+      margin-top: 0.8rem;
+      font-size: 0.82rem;
+      color: #8a9aa8;
+      border-top: 1px dashed #e2e9ee;
+      padding-top: 0.7rem;
+    }
+
+    .empty-note {
+      color: #8a9aa8;
+      font-size: 0.92rem;
+      padding: 1rem 0;
+    }
+
+    /* ---- Contact form ---- */
+    .form-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(10,126,164,0.08);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .field {
+      margin-bottom: 1.1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: #3a4a5a;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1.5px solid #d8e7ee;
+      border-radius: 9px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: #fbfdfe;
+      transition: border-color 0.15s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #14b8a6;
+      background: #fff;
+    }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    button.submit {
+      background: linear-gradient(135deg, #0a7ea4, #14b8a6);
+      color: #fff;
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 9px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    button.submit:hover { opacity: 0.9; }
+
+    .note {
+      font-size: 0.82rem;
+      color: #8a9aa8;
+      margin-top: 0.8rem;
+    }
+
+    #confirmation {
+      display: none;
+      background: #e6f9f4;
+      border: 1.5px solid #14b8a6;
+      color: #0a6b56;
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      margin-top: 1.2rem;
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.85rem;
+      color: #8a9aa8;
+      border-top: 1px solid #e2e9ee;
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SmileCare Dental Clinic</h1>
+    <p>Professional dental care in the heart of Karachi</p>
+    <div class="badge">📍 Clifton Block 5, Karachi</div>
+    <div class="header-links">
+      <a href="./admin.html" class="admin-btn" id="adminLink">Admin Panel →</a>
+      <div class="link-note" id="linkNote">
+        If the admin panel did not open, your browser blocked the jump.
+        Open it manually by adding <strong>admin.html</strong> to the end of this page's address.
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- AVAILABLE TIME SLOTS -->
+    <section id="slots">
+      <h2>Available Time Slots</h2>
+      <p class="section-sub">Select a slot for today — clinic hours: 9:00 AM to 6:00 PM</p>
+      <div class="slots-grid" id="slotsGrid">
+        <div class="slot" data-time="09:00 AM">09:00 AM<span>Available</span></div>
+        <div class="slot booked" data-time="10:00 AM">10:00 AM<span>Booked</span></div>
+        <div class="slot" data-time="11:00 AM">11:00 AM<span>Available</span></div>
+        <div class="slot" data-time="12:00 PM">12:00 PM<span>Available</span></div>
+        <div class="slot booked" data-time="01:00 PM">01:00 PM<span>Booked</span></div>
+        <div class="slot" data-time="02:00 PM">02:00 PM<span>Available</span></div>
+        <div class="slot" data-time="03:00 PM">03:00 PM<span>Available</span></div>
+        <div class="slot" data-time="04:00 PM">04:00 PM<span>Available</span></div>
+        <div class="slot" data-time="05:00 PM">05:00 PM<span>Available</span></div>
+      </div>
+    </section>
+
+    <!-- DOCTOR PROFILES -->
+    <section id="doctors">
+      <h2>Our Doctors</h2>
+      <p class="section-sub">Experienced specialists committed to gentle, quality care</p>
+      <div class="doctors-grid" id="doctorsGrid"></div>
+      <div class="empty-note" id="noDoctors" style="display:none;">
+        No doctors are currently listed. Please check back soon.
+      </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section id="contact">
+      <h2>Book an Appointment</h2>
+      <p class="section-sub">Fill in your details and we will confirm your slot by call or WhatsApp</p>
+
+      <div class="form-card">
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="e.g. Ahmed Ali" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone / WhatsApp</label>
+              <input type="tel" id="phone" placeholder="03XX-XXXXXXX" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="doctor">Preferred Doctor</label>
+              <select id="doctor">
+                <option value="Any">Any available doctor</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="slotField">Selected Time Slot</label>
+              <input type="text" id="slotField" placeholder="Tap a slot above" readonly>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="reason">Reason for Visit</label>
+            <textarea id="reason" placeholder="Briefly describe your dental concern..."></textarea>
+          </div>
+
+          <button type="submit" class="submit">Request Appointment</button>
+          <div id="confirmation"></div>
+          <p class="note">Or call us directly: <strong>+92 21 3586 1122</strong></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    SmileCare Dental Clinic · Clifton Block 5, Karachi · Open Mon–Sat, 9:00 AM – 6:00 PM
+  </footer>
+
+  <script>
+    /* ---------- Shared doctor data (same key as admin.html) ---------- */
+    const STORAGE_KEY = 'smilecare_doctors';
+
+    const DEFAULT_DOCTORS = [
+      {
+        id: 'd1',
+        name: 'Dr. Ayesha Raza',
+        specialty: 'Orthodontist',
+        experience: 12,
+        days: 'Mon – Wed',
+        bio: 'Braces, aligners and bite correction for all ages.',
+        status: 'active'
+      },
+      {
+        id: 'd2',
+        name: 'Dr. Bilal Khan',
+        specialty: 'Oral Surgeon',
+        experience: 9,
+        days: 'Tue – Thu',
+        bio: 'Wisdom tooth extraction and minor surgical procedures.',
+        status: 'active'
+      },
+      {
+        id: 'd3',
+        name: 'Dr. Sana Mirza',
+        specialty: 'Pediatric Dentist',
+        experience: 7,
+        days: 'Wed – Sat',
+        bio: 'Friendly dental care designed for children.',
+        status: 'active'
+      }
+    ];
+
+    function loadDoctors() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return DEFAULT_DOCTORS.slice();
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : DEFAULT_DOCTORS.slice();
+      } catch (e) {
+        return DEFAULT_DOCTORS.slice();
+      }
+    }
+
+    function initials(name) {
+      return name
+        .replace(/^Dr\.?\s*/i, '')
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(w => w[0].toUpperCase())
+        .join('');
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    /* ---------- Render doctors ---------- */
+    const allDoctors = loadDoctors();
+    const activeDoctors = allDoctors.filter(d => d.status === 'active');
+
+    const doctorsGrid = document.getElementById('doctorsGrid');
+    const noDoctors = document.getElementById('noDoctors');
+    const doctorSelect = document.getElementById('doctor');
+
+    if (activeDoctors.length === 0) {
+      noDoctors.style.display = 'block';
+    } else {
+      activeDoctors.forEach(doc => {
+        const card = document.createElement('div');
+        card.className = 'doctor-card';
+        card.innerHTML = `
+          <div class="avatar">${initials(doc.name)}</div>
+          <h3>${escapeHtml(doc.name)}</h3>
+          <div class="specialty">${escapeHtml(doc.specialty)}</div>
+          <p>${escapeHtml(doc.bio || '')}</p>
+          <div class="doctor-meta">
+            ${escapeHtml(String(doc.experience))} years experience<br>${escapeHtml(doc.days)}
+          </div>
+        `;
+        doctorsGrid.appendChild(card);
+
+        const opt = document.createElement('option');
+        opt.value = doc.name;
+        opt.textContent = `${doc.name} (${doc.specialty})`;
+        doctorSelect.appendChild(opt);
+      });
+    }
+
+    /* ---------- Admin link fallback ---------- */
+    document.getElementById('adminLink').addEventListener('click', function () {
+      const note = document.getElementById('linkNote');
+      note.style.display = 'block';
+    });
+
+    /* ---------- Time slots ---------- */
+    const slots = document.querySelectorAll('.slot:not(.booked)');
+    const slotField = document.getElementById('slotField');
+
+    slots.forEach(slot => {
+      slot.addEventListener('click', () => {
+        document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+        slot.classList.add('selected');
+        slotField.value = slot.dataset.time;
+      });
+    });
+
+    /* ---------- Booking form ---------- */
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const slot = slotField.value;
+      const doctor = document.getElementById('doctor').value;
+      const box = document.getElementById('confirmation');
+
+      if (!slot) {
+        box.style.display = 'block';
+        box.style.background = '#fdecec';
+        box.style.borderColor = '#e57373';
+        box.style.color = '#b23c3c';
+        box.textContent = 'Please select a time slot above before submitting.';
+        return;
+      }
+
+      box.style.display = 'block';
+      box.style.background = '#e6f9f4';
+      box.style.borderColor = '#14b8a6';
+      box.style.color = '#0a6b56';
+      box.textContent = `Thank you, ${name}! Your request for ${slot} with ${doctor} has been received. We will confirm shortly.`;
+      this.reset();
+      document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+      slotField.value = '';
+    });
+  </script>
+
+</body>
+</html>
