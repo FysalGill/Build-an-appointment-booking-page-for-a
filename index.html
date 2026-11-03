@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmileCare Dental Clinic — Karachi | Book an Appointment</title>
+  <title>SmileCare Admin — Doctor Management</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -17,215 +17,116 @@
     header {
       background: linear-gradient(135deg, #f7d34e, #f2b705);
       color: #3a2e05;
-      padding: 3rem 1.5rem 2.5rem;
-      text-align: center;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    header h1 {
-      font-size: 2.2rem;
-      letter-spacing: -0.5px;
+    header h1 { font-size: 1.6rem; letter-spacing: -0.4px; }
+    header p { font-size: 0.9rem; opacity: 0.85; }
+
+    .header-actions {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
     }
 
-    header p {
-      margin-top: 0.6rem;
-      opacity: 0.92;
-      font-size: 1.05rem;
-    }
-
-    .badge {
-      display: inline-block;
-      margin-top: 1rem;
-      background: rgba(255,255,255,0.45);
-      border: 1px solid rgba(58,46,5,0.3);
-      padding: 0.3rem 1rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-    }
-
-    .header-links {
-      margin-top: 1.2rem;
-    }
-
-    .header-links a {
-      color: #3a2e05;
-      font-weight: 600;
+    .btn {
+      border: none;
+      border-radius: 9px;
+      padding: 0.6rem 1.2rem;
       font-size: 0.9rem;
-      text-decoration: none;
-      border-bottom: 1.5px solid rgba(58,46,5,0.4);
-      padding-bottom: 2px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.15s ease, transform 0.15s ease;
     }
 
-    .header-links a:hover { border-bottom-color: #3a2e05; }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
-    .header-links a.admin-btn {
-      display: inline-block;
-      background: rgba(255,255,255,0.55);
+    .btn-primary {
+      background: linear-gradient(135deg, #0a7ea4, #14b8a6);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.5);
       border: 1.5px solid rgba(58,46,5,0.35);
-      border-radius: 999px;
-      padding: 0.45rem 1.3rem;
-      border-bottom: 1.5px solid rgba(58,46,5,0.35);
+      color: #3a2e05;
     }
 
-    .header-links a.admin-btn:hover {
-      background: #fff;
-      border-color: #3a2e05;
-    }
-
-    .link-note {
-      display: none;
-      max-width: 420px;
-      margin: 0.9rem auto 0;
+    .btn-danger {
+      background: #fdecec;
+      color: #b23c3c;
+      border: 1.5px solid #f3c9c9;
+      padding: 0.4rem 0.9rem;
       font-size: 0.82rem;
-      background: rgba(255,255,255,0.7);
-      border: 1px dashed rgba(58,46,5,0.4);
-      border-radius: 8px;
-      padding: 0.6rem 0.9rem;
-      color: #4a3a08;
+    }
+
+    .btn-edit {
+      background: #e6f4fb;
+      color: #0a6b8a;
+      border: 1.5px solid #c9e3ef;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.82rem;
     }
 
     main {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 2.5rem 1.5rem 4rem;
     }
 
-    section {
-      margin-bottom: 3rem;
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: 0 4px 14px rgba(10,126,164,0.08);
+      border-left: 5px solid #14b8a6;
+    }
+
+    .stat-card .label {
+      font-size: 0.82rem;
+      color: #7a8b9a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-card .value {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #0a7ea4;
+      margin-top: 0.2rem;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: #0a7ea4;
       margin-bottom: 0.3rem;
     }
 
     .section-sub {
       color: #5a6b7b;
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.93rem;
+      margin-bottom: 1.3rem;
     }
 
-    /* ---- Time slots ---- */
-    .slots-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 0.9rem;
-    }
-
-    .slot {
-      background: #fff;
-      border: 2px solid #d8e7ee;
-      border-radius: 12px;
-      padding: 0.9rem 0.5rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.18s ease;
-      font-weight: 600;
-      color: #0a7ea4;
-    }
-
-    .slot span {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: #7a8b9a;
-      margin-top: 0.15rem;
-    }
-
-    .slot:hover {
-      border-color: #14b8a6;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(10,126,164,0.13);
-    }
-
-    .slot.selected {
-      background: #14b8a6;
-      border-color: #14b8a6;
-      color: #fff;
-    }
-
-    .slot.selected span { color: rgba(255,255,255,0.85); }
-
-    .slot.booked {
-      background: #eef2f5;
-      border-color: #e2e9ee;
-      color: #a9b6c2;
-      cursor: not-allowed;
-    }
-
-    .slot.booked:hover {
-      transform: none;
-      box-shadow: none;
-      border-color: #e2e9ee;
-    }
-
-    /* ---- Doctors ---- */
-    .doctors-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.3rem;
-    }
-
-    .doctor-card {
+    .panel {
       background: #fff;
       border-radius: 14px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 14px rgba(10,126,164,0.08);
-      text-align: center;
-      border-top: 4px solid #14b8a6;
-    }
-
-    .avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #0a7ea4, #14b8a6);
-      color: #fff;
-      font-size: 1.5rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 0.9rem;
-    }
-
-    .doctor-card h3 {
-      font-size: 1.1rem;
-      color: #1f2d3d;
-    }
-
-    .specialty {
-      color: #14b8a6;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin: 0.2rem 0 0.6rem;
-    }
-
-    .doctor-card p {
-      font-size: 0.9rem;
-      color: #5a6b7b;
-    }
-
-    .doctor-meta {
-      margin-top: 0.8rem;
-      font-size: 0.82rem;
-      color: #8a9aa8;
-      border-top: 1px dashed #e2e9ee;
-      padding-top: 0.7rem;
-    }
-
-    .empty-note {
-      color: #8a9aa8;
-      font-size: 0.92rem;
-      padding: 1rem 0;
-    }
-
-    /* ---- Contact form ---- */
-    .form-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 2rem;
+      padding: 1.8rem;
       box-shadow: 0 4px 16px rgba(10,126,164,0.08);
+      margin-bottom: 2.5rem;
     }
 
     .form-row {
@@ -234,13 +135,11 @@
       gap: 1rem;
     }
 
-    .field {
-      margin-bottom: 1.1rem;
-    }
+    .field { margin-bottom: 1.1rem; }
 
     label {
       display: block;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 600;
       margin-bottom: 0.35rem;
       color: #3a4a5a;
@@ -248,10 +147,10 @@
 
     input, select, textarea {
       width: 100%;
-      padding: 0.75rem 0.9rem;
+      padding: 0.7rem 0.9rem;
       border: 1.5px solid #d8e7ee;
       border-radius: 9px;
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       font-family: inherit;
       background: #fbfdfe;
       transition: border-color 0.15s ease;
@@ -263,38 +162,125 @@
       background: #fff;
     }
 
-    textarea { resize: vertical; min-height: 90px; }
+    textarea { resize: vertical; min-height: 70px; }
 
-    button.submit {
+    .form-actions {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    thead th {
+      text-align: left;
+      background: #f0f7fa;
+      color: #3a4a5a;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 0.8rem 0.9rem;
+      border-bottom: 2px solid #d8e7ee;
+    }
+
+    tbody td {
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid #eef4f7;
+      vertical-align: middle;
+    }
+
+    tbody tr:hover { background: #fbfdfe; }
+
+    .doc-name {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-weight: 600;
+    }
+
+    .mini-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
       background: linear-gradient(135deg, #0a7ea4, #14b8a6);
       color: #fff;
-      border: none;
-      padding: 0.85rem 2rem;
-      border-radius: 9px;
-      font-size: 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
       font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.15s ease;
     }
 
-    button.submit:hover { opacity: 0.9; }
-
-    .note {
-      font-size: 0.82rem;
-      color: #8a9aa8;
-      margin-top: 0.8rem;
-    }
-
-    #confirmation {
-      display: none;
+    .tag-on {
       background: #e6f9f4;
-      border: 1.5px solid #14b8a6;
       color: #0a6b56;
-      padding: 1rem 1.2rem;
-      border-radius: 10px;
-      margin-top: 1.2rem;
-      font-weight: 500;
+      border: 1px solid #bfeee1;
     }
+
+    .tag-off {
+      background: #f2f5f7;
+      color: #8a9aa8;
+      border: 1px solid #e2e9ee;
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: #8a9aa8;
+      font-size: 0.95rem;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: #0a6b56;
+      color: #fff;
+      padding: 0.85rem 1.3rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 24px rgba(10,107,86,0.3);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.88rem;
+      color: #0a7ea4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link:hover { text-decoration: underline; }
 
     footer {
       text-align: center;
@@ -304,107 +290,156 @@
       border-top: 1px solid #e2e9ee;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       .form-row { grid-template-columns: 1fr; }
-      header h1 { font-size: 1.6rem; }
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      tbody tr {
+        border: 1px solid #e2e9ee;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+      }
+      tbody td {
+        border: none;
+        padding: 0.4rem 0.5rem;
+      }
+      tbody td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: #8a9aa8;
+        font-weight: 600;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>SmileCare Dental Clinic</h1>
-    <p>Professional dental care in the heart of Karachi</p>
-    <div class="badge">📍 Clifton Block 5, Karachi</div>
-    <div class="header-links">
-      <a href="./admin.html" class="admin-btn" id="adminLink">Admin Panel →</a>
-      <div class="link-note" id="linkNote">
-        If the admin panel did not open, your browser blocked the jump.
-        Open it manually by adding <strong>admin.html</strong> to the end of this page's address.
-      </div>
+    <div>
+      <h1>SmileCare Admin Panel</h1>
+      <p>Manage doctor profiles and availability</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-outline" id="resetBtn">Reset to Defaults</button>
+      <a class="btn btn-primary" href="index.html" style="text-decoration:none;">View Booking Page</a>
     </div>
   </header>
 
   <main>
 
-    <!-- AVAILABLE TIME SLOTS -->
-    <section id="slots">
-      <h2>Available Time Slots</h2>
-      <p class="section-sub">Select a slot for today — clinic hours: 9:00 AM to 6:00 PM</p>
-      <div class="slots-grid" id="slotsGrid">
-        <div class="slot" data-time="09:00 AM">09:00 AM<span>Available</span></div>
-        <div class="slot booked" data-time="10:00 AM">10:00 AM<span>Booked</span></div>
-        <div class="slot" data-time="11:00 AM">11:00 AM<span>Available</span></div>
-        <div class="slot" data-time="12:00 PM">12:00 PM<span>Available</span></div>
-        <div class="slot booked" data-time="01:00 PM">01:00 PM<span>Booked</span></div>
-        <div class="slot" data-time="02:00 PM">02:00 PM<span>Available</span></div>
-        <div class="slot" data-time="03:00 PM">03:00 PM<span>Available</span></div>
-        <div class="slot" data-time="04:00 PM">04:00 PM<span>Available</span></div>
-        <div class="slot" data-time="05:00 PM">05:00 PM<span>Available</span></div>
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat-card">
+        <div class="label">Total Doctors</div>
+        <div class="value" id="statTotal">0</div>
       </div>
-    </section>
-
-    <!-- DOCTOR PROFILES -->
-    <section id="doctors">
-      <h2>Our Doctors</h2>
-      <p class="section-sub">Experienced specialists committed to gentle, quality care</p>
-      <div class="doctors-grid" id="doctorsGrid"></div>
-      <div class="empty-note" id="noDoctors" style="display:none;">
-        No doctors are currently listed. Please check back soon.
+      <div class="stat-card">
+        <div class="label">Currently Active</div>
+        <div class="value" id="statActive">0</div>
       </div>
-    </section>
+      <div class="stat-card">
+        <div class="label">Specialties</div>
+        <div class="value" id="statSpecialties">0</div>
+      </div>
+    </div>
 
-    <!-- CONTACT FORM -->
-    <section id="contact">
-      <h2>Book an Appointment</h2>
-      <p class="section-sub">Fill in your details and we will confirm your slot by call or WhatsApp</p>
+    <!-- ADD / EDIT FORM -->
+    <section>
+      <h2 id="formTitle">Add New Doctor</h2>
+      <p class="section-sub">Fill in the details below. Fields marked * are required.</p>
 
-      <div class="form-card">
-        <form id="bookingForm">
+      <div class="panel">
+        <form id="doctorForm">
+          <input type="hidden" id="editingId" value="">
+
           <div class="form-row">
             <div class="field">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" placeholder="e.g. Ahmed Ali" required>
+              <label for="docName">Full Name *</label>
+              <input type="text" id="docName" placeholder="e.g. Dr. Hamza Sheikh" required>
             </div>
             <div class="field">
-              <label for="phone">Phone / WhatsApp</label>
-              <input type="tel" id="phone" placeholder="03XX-XXXXXXX" required>
+              <label for="docSpecialty">Specialty *</label>
+              <select id="docSpecialty" required>
+                <option value="">Select specialty...</option>
+                <option>Orthodontist</option>
+                <option>Oral Surgeon</option>
+                <option>Pediatric Dentist</option>
+                <option>Endodontist</option>
+                <option>Periodontist</option>
+                <option>Prosthodontist</option>
+                <option>General Dentist</option>
+              </select>
             </div>
           </div>
 
           <div class="form-row">
             <div class="field">
-              <label for="doctor">Preferred Doctor</label>
-              <select id="doctor">
-                <option value="Any">Any available doctor</option>
-              </select>
+              <label for="docExperience">Years of Experience *</label>
+              <input type="number" id="docExperience" min="0" max="60" placeholder="e.g. 8" required>
             </div>
             <div class="field">
-              <label for="slotField">Selected Time Slot</label>
-              <input type="text" id="slotField" placeholder="Tap a slot above" readonly>
+              <label for="docDays">Working Days *</label>
+              <input type="text" id="docDays" placeholder="e.g. Mon – Wed" required>
             </div>
           </div>
 
           <div class="field">
-            <label for="reason">Reason for Visit</label>
-            <textarea id="reason" placeholder="Briefly describe your dental concern..."></textarea>
+            <label for="docBio">Short Bio</label>
+            <textarea id="docBio" placeholder="One or two lines about the doctor's focus and approach..."></textarea>
           </div>
 
-          <button type="submit" class="submit">Request Appointment</button>
-          <div id="confirmation"></div>
-          <p class="note">Or call us directly: <strong>+92 21 3586 1122</strong></p>
+          <div class="field">
+            <label for="docStatus">Status</label>
+            <select id="docStatus">
+              <option value="active">Active — visible on booking page</option>
+              <option value="inactive">Inactive — hidden from patients</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Add Doctor</button>
+            <button type="button" class="btn btn-outline" id="cancelBtn" style="display:none;">Cancel Edit</button>
+          </div>
         </form>
+      </div>
+    </section>
+
+    <!-- DOCTOR LIST -->
+    <section>
+      <h2>All Doctors</h2>
+      <p class="section-sub">Edit or remove profiles. Only active doctors appear on the booking page.</p>
+
+      <div class="panel">
+        <table>
+          <thead>
+            <tr>
+              <th>Doctor</th>
+              <th>Specialty</th>
+              <th>Experience</th>
+              <th>Days</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="doctorTableBody"></tbody>
+        </table>
+        <div class="empty" id="emptyState" style="display:none;">No doctors yet. Add one using the form above.</div>
       </div>
     </section>
 
   </main>
 
   <footer>
-    SmileCare Dental Clinic · Clifton Block 5, Karachi · Open Mon–Sat, 9:00 AM – 6:00 PM
+    SmileCare Dental Clinic · Admin Panel · Changes are saved in this browser
   </footer>
 
+  <div class="toast" id="toast"></div>
+
   <script>
-    /* ---------- Shared doctor data (same key as admin.html) ---------- */
     const STORAGE_KEY = 'smilecare_doctors';
 
     const DEFAULT_DOCTORS = [
@@ -448,6 +483,10 @@
       }
     }
 
+    function saveDoctors(list) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
     function initials(name) {
       return name
         .replace(/^Dr\.?\s*/i, '')
@@ -456,6 +495,80 @@
         .slice(0, 2)
         .map(w => w[0].toUpperCase())
         .join('');
+    }
+
+    let doctors = loadDoctors();
+
+    const tbody = document.getElementById('doctorTableBody');
+    const emptyState = document.getElementById('emptyState');
+    const form = document.getElementById('doctorForm');
+    const editingId = document.getElementById('editingId');
+    const formTitle = document.getElementById('formTitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const toast = document.getElementById('toast');
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function renderStats() {
+      document.getElementById('statTotal').textContent = doctors.length;
+      document.getElementById('statActive').textContent =
+        doctors.filter(d => d.status === 'active').length;
+      document.getElementById('statSpecialties').textContent =
+        new Set(doctors.map(d => d.specialty)).size;
+    }
+
+    function renderTable() {
+      tbody.innerHTML = '';
+
+      if (doctors.length === 0) {
+        emptyState.style.display = 'block';
+        renderStats();
+        return;
+      }
+      emptyState.style.display = 'none';
+
+      doctors.forEach(doc => {
+        const tr = document.createElement('tr');
+
+        const active = doc.status === 'active';
+
+        tr.innerHTML = `
+          <td data-label="Doctor">
+            <div class="doc-name">
+              <div class="mini-avatar">${initials(doc.name)}</div>
+              <div>
+                ${escapeHtml(doc.name)}
+                ${doc.bio ? `<div style="font-size:0.78rem;font-weight:400;color:#8a9aa8;">${escapeHtml(doc.bio)}</div>` : ''}
+              </div>
+            </div>
+          </td>
+          <td data-label="Specialty">${escapeHtml(doc.specialty)}</td>
+          <td data-label="Experience">${escapeHtml(String(doc.experience))} yrs</td>
+          <td data-label="Days">${escapeHtml(doc.days)}</td>
+          <td data-label="Status">
+            <span class="tag ${active ? 'tag-on' : 'tag-off'}">${active ? 'Active' : 'Inactive'}</span>
+          </td>
+          <td data-label="Actions">
+            <div class="row-actions">
+              <button class="btn btn-edit" data-action="edit" data-id="${doc.id}">Edit</button>
+              <button class="btn btn-edit" data-action="toggle" data-id="${doc.id}">
+                ${active ? 'Deactivate' : 'Activate'}
+              </button>
+              <button class="btn btn-danger" data-action="delete" data-id="${doc.id}">Delete</button>
+            </div>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      });
+
+      renderStats();
     }
 
     function escapeHtml(str) {
@@ -467,82 +580,102 @@
         .replace(/'/g, '&#39;');
     }
 
-    /* ---------- Render doctors ---------- */
-    const allDoctors = loadDoctors();
-    const activeDoctors = allDoctors.filter(d => d.status === 'active');
-
-    const doctorsGrid = document.getElementById('doctorsGrid');
-    const noDoctors = document.getElementById('noDoctors');
-    const doctorSelect = document.getElementById('doctor');
-
-    if (activeDoctors.length === 0) {
-      noDoctors.style.display = 'block';
-    } else {
-      activeDoctors.forEach(doc => {
-        const card = document.createElement('div');
-        card.className = 'doctor-card';
-        card.innerHTML = `
-          <div class="avatar">${initials(doc.name)}</div>
-          <h3>${escapeHtml(doc.name)}</h3>
-          <div class="specialty">${escapeHtml(doc.specialty)}</div>
-          <p>${escapeHtml(doc.bio || '')}</p>
-          <div class="doctor-meta">
-            ${escapeHtml(String(doc.experience))} years experience<br>${escapeHtml(doc.days)}
-          </div>
-        `;
-        doctorsGrid.appendChild(card);
-
-        const opt = document.createElement('option');
-        opt.value = doc.name;
-        opt.textContent = `${doc.name} (${doc.specialty})`;
-        doctorSelect.appendChild(opt);
-      });
+    function resetForm() {
+      form.reset();
+      editingId.value = '';
+      formTitle.textContent = 'Add New Doctor';
+      submitBtn.textContent = 'Add Doctor';
+      cancelBtn.style.display = 'none';
     }
 
-    /* ---------- Admin link fallback ---------- */
-    document.getElementById('adminLink').addEventListener('click', function () {
-      const note = document.getElementById('linkNote');
-      note.style.display = 'block';
-    });
-
-    /* ---------- Time slots ---------- */
-    const slots = document.querySelectorAll('.slot:not(.booked)');
-    const slotField = document.getElementById('slotField');
-
-    slots.forEach(slot => {
-      slot.addEventListener('click', () => {
-        document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
-        slot.classList.add('selected');
-        slotField.value = slot.dataset.time;
-      });
-    });
-
-    /* ---------- Booking form ---------- */
-    document.getElementById('bookingForm').addEventListener('submit', function (e) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const slot = slotField.value;
-      const doctor = document.getElementById('doctor').value;
-      const box = document.getElementById('confirmation');
 
-      if (!slot) {
-        box.style.display = 'block';
-        box.style.background = '#fdecec';
-        box.style.borderColor = '#e57373';
-        box.style.color = '#b23c3c';
-        box.textContent = 'Please select a time slot above before submitting.';
+      const data = {
+        name: document.getElementById('docName').value.trim(),
+        specialty: document.getElementById('docSpecialty').value,
+        experience: Number(document.getElementById('docExperience').value),
+        days: document.getElementById('docDays').value.trim(),
+        bio: document.getElementById('docBio').value.trim(),
+        status: document.getElementById('docStatus').value
+      };
+
+      if (!data.name || !data.specialty || !data.days || isNaN(data.experience)) {
+        showToast('Please fill in all required fields.');
         return;
       }
 
-      box.style.display = 'block';
-      box.style.background = '#e6f9f4';
-      box.style.borderColor = '#14b8a6';
-      box.style.color = '#0a6b56';
-      box.textContent = `Thank you, ${name}! Your request for ${slot} with ${doctor} has been received. We will confirm shortly.`;
-      this.reset();
-      document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
-      slotField.value = '';
+      if (editingId.value) {
+        const idx = doctors.findIndex(d => d.id === editingId.value);
+        if (idx > -1) {
+          doctors[idx] = { ...doctors[idx], ...data };
+          showToast('Doctor updated.');
+        }
+      } else {
+        doctors.push({ id: 'd' + Date.now(), ...data });
+        showToast('Doctor added.');
+      }
+
+      saveDoctors(doctors);
+      renderTable();
+      resetForm();
     });
+
+    cancelBtn.addEventListener('click', resetForm);
+
+    tbody.addEventListener('click', function (e) {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+
+      const id = btn.dataset.id;
+      const action = btn.dataset.action;
+      const doc = doctors.find(d => d.id === id);
+      if (!doc) return;
+
+      if (action === 'edit') {
+        editingId.value = doc.id;
+        document.getElementById('docName').value = doc.name;
+        document.getElementById('docSpecialty').value = doc.specialty;
+        document.getElementById('docExperience').value = doc.experience;
+        document.getElementById('docDays').value = doc.days;
+        document.getElementById('docBio').value = doc.bio || '';
+        document.getElementById('docStatus').value = doc.status;
+
+        formTitle.textContent = 'Edit Doctor — ' + doc.name;
+        submitBtn.textContent = 'Save Changes';
+        cancelBtn.style.display = 'inline-block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      if (action === 'toggle') {
+        doc.status = doc.status === 'active' ? 'inactive' : 'active';
+        saveDoctors(doctors);
+        renderTable();
+        showToast(doc.name + ' is now ' + doc.status + '.');
+      }
+
+      if (action === 'delete') {
+        if (confirm('Delete ' + doc.name + '? This cannot be undone.')) {
+          doctors = doctors.filter(d => d.id !== id);
+          saveDoctors(doctors);
+          renderTable();
+          if (editingId.value === id) resetForm();
+          showToast('Doctor deleted.');
+        }
+      }
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', function () {
+      if (confirm('Reset all doctors back to the default three profiles?')) {
+        doctors = DEFAULT_DOCTORS.slice();
+        saveDoctors(doctors);
+        renderTable();
+        resetForm();
+        showToast('Defaults restored.');
+      }
+    });
+
+    renderTable();
   </script>
 
 </body>
